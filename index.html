@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Sayangku - Galeri Cinta
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+            color: #5d4037;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1.5s ease-out;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #d81b60, #ffafbd, #d81b60);
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #5d4037;
+        }
+        
+        .heart {
+            color: #d81b60;
+            display: inline-block;
+            margin: 0 5px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            animation: slideUp 1s ease-out;
+        }
+        
+        .gallery-slider {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 15px;
+        }
+        
+        .gallery-slide {
+            min-width: 100%;
+            height: 550px;
+            position: relative;
+        }
+        
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 15px;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-slide img:hover {
+            transform: scale(1.03);
+        }
+        
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .gallery-slide:hover .slide-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .gallery-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 25px;
+            gap: 15px;
+            animation: fadeIn 1.5s ease-out 0.5s both;
+        }
+        
+        .gallery-controls button {
+            background: linear-gradient(to right, #d81b60, #ff4f81);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+        }
+        
+        .gallery-controls button:hover {
+            background: linear-gradient(to right, #ad1457, #d81b60);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+        }
+        
+        .love-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .love-message {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out 0.7s both;
+        }
+        
+        .love-message h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d81b60;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .love-message p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .language-effects {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            flex: 1;
+            min-width: 300px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out 0.9s both;
+        }
+        
+        .language-effects h2 {
+            font-family: 'Playfair Display', serif;
+            color: #d81b60;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .language-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .lang-btn {
+            background: linear-gradient(to right, #5d4037, #8d6e63);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lang-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .lang-btn:hover::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        .lang-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.4);
+        }
+        
+        .love-display {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 245, 245, 0.9);
+            border-radius: 15px;
+            text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+        
+        .love-display h3 {
+            color: #d81b60;
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .love-display p {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #5d4037;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .love-display .translation {
+            font-size: 1rem;
+            color: #8d6e63;
+            margin-top: 5px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #5d4037;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            animation: fadeIn 1.5s ease-out 1.2s both;
+        }
+        
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart-fall {
+            position: absolute;
+            top: -50px;
+            color: rgba(216, 27, 96, 0.7);
+            font-size: 20px;
+            animation: fall 10s linear infinite;
+        }
+        
+        .music-player {
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 1.5s ease-out 1s both;
+        }
+        
+        .music-btn {
+            background: linear-gradient(to right, #5d4037, #8d6e63);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        
+        .music-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.4);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        .play-button {
+            background: linear-gradient(to right, #d81b60, #ff4f81);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 24px;
+            font-family: 'Dancing Script', cursive;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(216, 27, 96, 0.5);
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(216, 27, 96, 0.6);
+        }
+        
+        /* Animasi Keyframes */
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(216, 27, 96, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 15px 40px rgba(216, 27, 96, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(216, 27, 96, 0.5);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .gallery-slide {
+                height: 400px;
+            }
+            
+            .love-message p {
+                font-size: 1rem;
+            }
+            
+            .language-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-container" id="hearts"></div>
+    
+    <!-- Overlay untuk play button pertama kali -->
+    <div class="overlay" id="overlay">
+        <button class="play-button" id="firstPlayBtn">
+            <i class="fas fa-play"></i> PENCET INI DLUUU
+        </button>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Untuk <span class="heart">❤</span> kiaaaa<span class="heart">❤</span></h1>
+            <p class="subtitle">Setiap momen bersamamu adalah cerita indah dalam hidupku</p>
+            <p>Scroll down untuk melihat keindahanmu</p>
+        </header>
+        
+        <div class="gallery-container">
+            <div class="gallery-slider" id="gallerySlider">
+                <div class="gallery-slide">
+                    <img src="foto5.jpg.jpeg" alt="Foto Pacar 1" onerror="this.src='https://placehold.co/600x400/ffafbd/5d4037?text=Foto+Kita+1'">
+                    <div class="slide-caption">cantiknyaa kelewatann</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="foto2.jpg.jpeg" alt="Foto Pacar 2" onerror="this.src='https://placehold.co/600x400/ffc3a0/5d4037?text=Foto+Kita+2'">
+                    <div class="slide-caption">cantikkkkk</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="foto3.jpg.jpeg" alt="Foto Pacar 3" onerror="this.src='https://placehold.co/600x400/ffafbd/5d4037?text=Foto+Kita+3'">
+                    <div class="slide-caption">imut</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="foto4.jpg.jpeg" alt="Foto Pacar 4" onerror="this.src='https://placehold.co/600x400/ffc3a0/5d4037?text=Foto+Kita+4'">
+                    <div class="slide-caption">Senyumanmu menerangi hariku</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gallery-controls">
+            <button id="prevBtn"><i class="fas fa-chevron-left"></i> Sebelumnya</button>
+            <button id="nextBtn">Selanjutnya <i class="fas fa-chevron-right"></i></button>
+        </div>
+        
+        <div class="love-section">
+            <div class="love-message">
+                <h2>Surat Cinta Untukmu</h2>
+                <p>Sayangku,</p>
+                <p>Setiap hari bersamamu adalah anugerah yang tak ternilai. Terima kasih telah menjadi cahaya dalam hidupku, yang selalu menerangi kegelapan dan membawa kehangatan di hatiku.</p>
+                <p>Aku mencintaimu lebih dari kata-kata yang bisa diucapkan. Setiap detik yang kita lalui bersama adalah halaman baru dalam buku indah kisah cinta kita.</p>
+                <p>❤ ❤ ❤</p>
+            </div>
+            
+            <div class="language-effects">
+                <h2>Ungkapan Cinta dalam Berbagai Bahasa</h2>
+                <p>Pilih bahasa untuk melihat bagaimana "Aku Cinta Kamu" diucapkan di seluruh dunia:</p>
+                
+                <div class="language-buttons">
+                    <button class="lang-btn" data-lang="english">English</button>
+                    <button class="lang-btn" data-lang="french">Français</button>
+                    <button class="lang-btn" data-lang="spanish">Español</button>
+                    <button class="lang-btn" data-lang="italian">Italiano</button>
+                    <button class="lang-btn" data-lang="german">Deutsch</button>
+                    <button class="lang-btn" data-lang="japanese">日本語</button>
+                    <button class="lang-btn" data-lang="korean">한국어</button>
+                    <button class="lang-btn" data-lang="mandarin">中文</button>
+                </div>
+                
+                <div class="love-display">
+                    <h3>Ungkapan Cinta</h3>
+                    <p id="love-expression">I Love You</p>
+                    <p class="translation" id="love-translation">(Aku Cinta Kamu dalam Bahasa Inggris)</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="music-player">
+            <button class="music-btn" id="musicToggle">
+                <i class="fas fa-music"></i> Putar Musik Romantis
+            </button>
+            <audio id="bgMusic" loop>
+                <source src="music.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+    
+    <footer>
+        <p>Dibuat dengan ❤ | Setiap hari bersamamu adalah hari yang istimewa</p>
+    </footer>
+
+    <script>
+        // Inisialisasi variabel
+        const overlay = document.getElementById('overlay');
+        const firstPlayBtn = document.getElementById('firstPlayBtn');
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+        let userInteracted = false;
+
+        // Overlay dan auto-play musik dengan interaksi pengguna
+        firstPlayBtn.addEventListener('click', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
+            
+            // Memutar musik setelah interaksi pengguna
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i> Jeda Musik';
+            }).catch(error => {
+                console.log('Autoplay prevented:', error);
+            });
+            
+            userInteracted = true;
+        });
+
+        // Galeri foto slider
+        const slider = document.getElementById('gallerySlider');
+        const slides = document.querySelectorAll('.gallery-slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentSlide = 0;
+        const slideCount = slides.length;
+        
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+        
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        });
+        
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            updateSlider();
+        });
+        
+        // Efek jatuhnya hati
+        const heartsContainer = document.getElementById('hearts');
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            
+            heartsContainer.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+        
+        setInterval(createHeart, 300);
+        
+        // Auto slide setiap 5 detik
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slideCount;
+            updateSlider();
+        }, 5000);
+        
+        // Efek bahasa cinta
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const loveExpression = document.getElementById('love-expression');
+        const loveTranslation = document.getElementById('love-translation');
+        
+        const expressions = {
+            english: { expression: "I Love You", translation: "Aku Cinta Kamu dalam Bahasa Inggris" },
+            french: { expression: "Je t'aime", translation: "Aku Cinta Kamu dalam Bahasa Prancis" },
+            spanish: { expression: "Te amo", translation: "Aku Cinta Kamu dalam Bahasa Spanyol" },
+            italian: { expression: "Ti amo", translation: "Aku Cinta Kamu dalam Bahasa Italia" },
+            german: { expression: "Ich liebe dich", translation: "Aku Cinta Kamu dalam Bahasa Jerman" },
+            japanese: { expression: "愛してる", translation: "Aishiteru - Aku Cinta Kamu dalam Bahasa Jepang" },
+            korean: { expression: "사랑해", translation: "Saranghae - Aku Cinta Kamu dalam Bahasa Korea" },
+            mandarin: { expression: "我爱你", translation: "Wǒ ài nǐ - Aku Cinta Kamu dalam Bahasa Mandarin" }
+        };
+        
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const lang = button.dataset.lang;
+                loveExpression.textContent = expressions[lang].expression;
+                loveTranslation.textContent = expressions[lang].translation;
+                
+                // Efek animasi
+                loveExpression.style.transform = 'scale(1.2)';
+                loveTranslation.style.transform = 'scale(1.1)';
+                
+                setTimeout(() => {
+                    loveExpression.style.transform = 'scale(1)';
+                    loveTranslation.style.transform = 'scale(1)';
+                }, 300);
+                
+                // Tambahkan efek confetti untuk bahasa
+                createLanguageConfetti();
+            });
+        });
+        
+        // Musik latar
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music"></i> Putar Musik Romantis';
+            } else {
+                bgMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i> Jeda Musik';
+            }
+            isPlaying = !isPlaying;
+        });
+        
+        // Efek confetti untuk bahasa
+        function createLanguageConfetti() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('heart-fall');
+                    confetti.innerHTML = '❤';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.fontSize = (Math.random() * 15 + 8) + 'px';
+                    confetti.style.zIndex = '1000';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+        
+        // Animasi teks surat cinta
+        const loveMessages = document.querySelectorAll('.love-message p');
+        loveMessages.forEach((msg, index) => {
+            msg.style.opacity = '0';
+            msg.style.transform = 'translateY(20px)';
+            msg.style.transition = `opacity 0.5s ease ${index * 0.2}s, transform 0.5s ease ${index * 0.2}s`;
+            
+            setTimeout(() => {
+                msg.style.opacity = '1';
+                msg.style.transform = 'translateY(0)';
+            }, 1000 + (index * 200));
+        });
+        
+        // Fallback untuk gambar yang tidak ditemukan
+        document.querySelectorAll('img').forEach(img => {
+            img.onerror = function() {
+                this.style.border = '2px dashed #d81b60';
+            };
+        });
+    </script>
+</body>
+</html>
